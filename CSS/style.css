@@ -1,0 +1,25 @@
+p {
+  color: red;
+}
+
+#p1 {
+  font-size: 2em;
+  color: blue;
+}
+
+.p-sm {
+  font-size: 0.5em;
+}
+#p3 {
+  font-style: italic;
+}
+
+div {
+  /* height: 100px; */
+  /* width: 100px; */
+  /* background-color: red; */
+}
+.b-word {
+  font-weight: bold;
+  text-decoration: underline;
+}

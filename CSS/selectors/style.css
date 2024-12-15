@@ -1,0 +1,29 @@
+*{
+   background-color: aqua; 
+}
+
+
+/* p, h1{
+    color: red;
+} */
+
+h1.head-elm  {
+    color: red;
+
+}
+
+
+li>a{
+    border: 1px solid rgb(0, 0, 0);
+}
+
+p a{
+    color: red;
+}
+
+h1~p{
+    text-decoration: underline;
+}
+
+
+
