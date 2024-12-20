@@ -1,25 +1,55 @@
-p {
+/* p {
   color: red;
 }
-
 #p1 {
   font-size: 2em;
   color: blue;
 }
+.p2 {
+  font-size: 2em ;
+  color: rgb(255, 0, 0);
+}
 
-.p-sm {
+
+
+
+
+p {
+  color: rgb(94, 255, 0) ;
+} */
+
+#d1{
+  color: aqua;
+  border: 1px solid black;
+}
+#d2{
+  color: aqua;
+  border: 1px solid rgb(255, 0, 0);
+}
+
+p{
+  border: inherit;
+}
+
+
+
+
+
+
+
+/* .p-sm {
   font-size: 0.5em;
 }
 #p3 {
   font-style: italic;
-}
+} */
 
 div {
   /* height: 100px; */
   /* width: 100px; */
   /* background-color: red; */
 }
-.b-word {
+/* .b-word {
   font-weight: bold;
   text-decoration: underline;
-}
+} */
