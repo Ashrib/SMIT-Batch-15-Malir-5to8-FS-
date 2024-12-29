@@ -1,0 +1,52 @@
+h1{
+  text-decoration: underline;
+  letter-spacing: 10px;
+}
+
+p{
+  line-height: 30px;
+  /* word-spacing: 15px; */
+  text-align: justify;
+  
+}
+
+span{
+  vertical-align: text-bottom;
+}
+
+h2{
+  text-indent: -9999px;
+  color: rgb(255, 255, 255);
+  background-image: url('../../HTML/Linking/assets/images/IMG_20241125_100321.jpg');
+}
+h3{
+  text-shadow: -5px -10px 2px red;
+}
+
+h3::first-letter{
+  font-size: 3em;
+}
+p::first-line{
+  font-style: italic;
+}
+
+
+h3:hover{
+  color: red;
+}
+
+
+a:link{
+  color: green;
+}
+a:visited{
+  color: rgb(2, 2, 2);
+}
+a:active{
+  color: rgb(255, 238, 4);
+}
+
+
+input:focus{
+  padding: 10px;
+}
