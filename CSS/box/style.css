@@ -3,7 +3,6 @@ body{
   margin: 0;
 }
 
-
 .main{
   height: 200px;
   width: 70%;
@@ -15,8 +14,54 @@ body{
   max-width: 300px;
   /* max-height: 300px;
   min-height: 300px; */
+  margin: 1px auto 1px auto;
+  border: 3px dotted black;
+  border-color: yellow blue green orangered;
+
 }
+
 
 h1{
   margin: 0;
+
 }
+
+.box{
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+  margin: 5px 15px;
+  display: inline-block;
+
+
+  border-radius: 5px 30px;
+}
+.box>span{
+  
+  display: block;
+}
+
+nav{
+  border-bottom: 2px solid black ;
+  margin-bottom: 15px;
+}
+nav>ul{
+  list-style: none;
+}
+nav>ul>li{
+  display: inline;
+  margin: 0px 3px;
+}
+
+.setting{
+  display: none;
+}
+
+.fb{
+  visibility: hidden;
+}
+
+
+
+
+
