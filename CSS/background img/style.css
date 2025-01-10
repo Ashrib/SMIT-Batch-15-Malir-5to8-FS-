@@ -1,0 +1,32 @@
+/* css variables */
+:root{
+  --gColor: linear-gradient(14deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 94%, rgba(252,176,69,1) 100%);
+  --myHeadingFont: 3em;
+  --boxWidth: 50%;
+  
+  
+}
+
+.main{
+  /* background-image: url('../../HTML/Linking/assets/images/IMG_20241125_100321.jpg'); */
+  background-repeat: no-repeat;
+  background-size: contain;
+  /* background-position:  50% 50%; */
+  height: 90vh;
+  width: 90vw;
+  border: 1px solid black;
+  overflow: scroll;
+  background: var(--gColor) ;
+}
+h1{
+  background: var(--gColor) ;
+  color: transparent;
+  background-clip: text;
+  font-size: var(--myHeadingFont);
+}
+
+
+
+
+
+

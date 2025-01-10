@@ -13,6 +13,7 @@ ul {
 td {
   border: 1px solid #0088dd;
   padding: 15px;
+  cursor: pointer;
 }
 table.one {
   empty-cells: show;
