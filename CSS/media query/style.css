@@ -1,0 +1,66 @@
+.logo, ul, nav li, .other-links ,.other-links>div{
+  display: inline-block;
+}
+
+.logo{
+  background-color: antiquewhite;
+}
+
+ul{
+  background-color: rgb(255, 145, 0);
+}
+
+.other-links{
+  background-color: rgb(225, 242, 34);
+}
+
+.box{
+  height: 200px;
+  width: 200px;
+  background-color: red;
+}
+#icon{
+  display: none;
+}
+
+
+
+
+
+
+
+/* media query */
+@media screen and (max-width:300px){
+  
+  .logo{
+    background-color: rgb(255, 140, 0);
+  }
+}
+
+@media screen and (min-width:768px) {
+  nav li{
+    display: block;
+  }
+
+}
+
+@media screen and (max-width:425px) {
+  .other-links>div{
+    display: none;
+
+  }
+  #icon{
+    display: inline-block;
+  }
+
+}
+
+
+@media screen and (min-width:300px) and (max-width:800px) {
+  .box{
+    background-color: aqua;
+  }
+  
+}
+
+

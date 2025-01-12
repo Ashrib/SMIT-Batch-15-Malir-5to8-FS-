@@ -1,0 +1,45 @@
+.box{
+  height: 100px;
+  width: 100px;
+
+}
+
+.one{
+  background-color: red;
+  font-size:0.5em;
+}
+
+.two{
+  background-color: rgb(255, 123, 0);
+  font-size:2em;
+}
+.three{
+  background-color: rgb(77, 255, 0);
+  font-size:3em;
+}
+
+.four{
+  background-color: rgb(0, 149, 255);
+  font-size:1.5em;
+}
+.main, .main2{
+  height: 400px;
+  border: 2px solid black;
+  display: flex;
+}
+
+.main{
+  /* flex-direction: row;
+  flex-wrap: wrap; */
+  flex-flow: row wrap ;
+  justify-content: center;
+  /* justify-content: space-between; */
+  align-items: baseline;
+}
+
+.main2{
+  height: 500px;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+}
