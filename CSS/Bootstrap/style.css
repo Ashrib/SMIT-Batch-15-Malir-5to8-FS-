@@ -1,0 +1,14 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+
+.navbar{
+    background-color: aqua ;
+}
+
+.b{
+    height: 100px ;
+    width: 100px ;
+    border: 1px solid black;
+}

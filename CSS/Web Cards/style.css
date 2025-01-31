@@ -28,8 +28,8 @@ body{
     align-items: center;
     justify-content: space-around;
     /* padding: 30px 20px; */
+    /* filter: blur(10px); */
 }
-
 .contain{
     display: flex;
     flex-direction: column;
@@ -37,7 +37,6 @@ body{
     border-bottom: 2px solid white;
     width: min-content;
     padding: 20px 10px;
-    
 }
 .text1{
     font-size: 1.5em;
