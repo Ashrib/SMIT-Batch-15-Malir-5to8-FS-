@@ -1,0 +1,29 @@
+.container-fluid{
+    background-color: rgb(255, 174, 174);
+}
+
+.box{
+    border: 2px solid black;
+    width: 200px;
+    height: 100px;
+}
+
+.row{
+    background-color: antiquewhite;
+    padding: 10px;
+    /* border: 1px solid red; */
+    margin: 5px 0;
+}
+.col-box, .card-box{
+    border: 1px solid black;
+
+}
+.box-4{
+    background-color: aqua;
+
+}
+
+.card-img{
+    height: 200px;
+    background-image: url('../../HTML/Linking/assets/images/IMG_20241125_100321.jpg');
+}
