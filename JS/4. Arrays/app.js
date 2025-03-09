@@ -37,3 +37,25 @@ console.log(mixArray)//
 
 var arr = [[1,2,[2,[3]]],4,5,6];
 console.log(arr[0][2][0]);//
+
+
+var char = ['a','b','c','d','e'];
+char.splice(1,2); // deleting
+console.log('splice delete: ',char);
+
+char.splice(1,0, 'b','c'); // adding
+console.log('splice add: ',char);
+
+char.splice(2,2,'x','y','z'); // adding with deleting
+console.log('splice add/delete: ',char);
+
+
+
+var names = ['usman', 'hamza', 'shazil', 'maaz', 'aniq'];
+
+var copyArray = names.slice(2,4);
+console.log('copy array: ',copyArray);
+var copyArray2 = names.slice(-4,-1);
+console.log('copy array 2: ',copyArray2);
+
+
