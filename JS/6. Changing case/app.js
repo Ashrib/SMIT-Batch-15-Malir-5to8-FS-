@@ -35,7 +35,7 @@ for (var i = 0; i < input.length; i++) {
     }
 }
 
-var text = "The New New Yorker magazine doesn't allow the phrase World War II some more text."
+var text = "The New New Yorker magazine doesn't doesn't allow the phrase World War II some more text."
 var text2 = "The New New Yorker magazine doesn't allow the phrase World War II some more text."
 for (var i = 0; i < text.length; i++) {
     if(text.slice(i, i+12) === 'World War II'){
@@ -50,3 +50,11 @@ if( charIndex !== -1){
     text2 = text2.slice(0, charIndex) + "the Second World War" + text2.slice(charIndex+12);
 }
 console.log(text2);
+
+
+
+console.log(text.charAt(2));
+console.log(text[2]);
+
+
+console.log(text.replace(/doesn't/g, 'does'));
