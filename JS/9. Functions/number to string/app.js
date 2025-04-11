@@ -3,9 +3,9 @@ function greeting(userName) {
 
 }
 
-var a = prompt('enter your')
+// var a = prompt('enter your')
 // shazil
-greeting(a);
+// greeting(a);
 
 // hamza
 greeting('hamza');
@@ -49,16 +49,37 @@ result('ali',20, 500,300)
 
 
 
+    
+var a = 5;
+function fun(){
+    var b = 10;
+    // if(true){
+        a = 0;
+        console.log('a:',a)
+    // }
+}
+fun()
 
-/// cal(opt, num1,num2){
-// opt =-*/
+console.log('a:',a);
+// console.log('b:',b);
 
-// if + sum(num1,num2) 
+// 5!
+// 5*4*3*2*1
 
-// }
+function factorial(n){
+    if(n == 1 || n == 0){
+        return 1
+    }
+    return n * factorial(n-1);
+}
+console.log(factorial(5));
+// return 5  *  4  * 3  *  2  * 1 
 
 
 
+function optGenerate(){
+    return Math.round(Math.random()*900 + 1000);
+}
 
-
-
+console.log(optGenerate())
+console.log(optGenerate())
