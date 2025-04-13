@@ -54,5 +54,16 @@ setInterval(function (){
 // }
 
 
+var dateObject = new Date();
+
+dateObject.setSeconds()
+
+
+
+
+
+
+
+
 
 

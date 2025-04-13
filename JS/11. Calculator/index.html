@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #hr{
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+       <span id="show" class="blue">text</span>
+
+       <br>
+       <input type="text" disabled id="userInput" placeholder="input to calculate">
+       <button onclick="valueToSet('del')">del</button>
+       <button onclick="valueToSet('c')">C</button>
+       <button onclick="valueToSet('1')">1</button>
+       <button onclick="valueToSet('2')">2</button>
+       <button onclick="valueToSet('3')">3</button>
+       <button onclick="valueToSet('4')">4</button>
+       <button onclick="valueToSet('+')">+</button>
+       <button onclick="valueToSet('-')">-</button>
+       <button onclick="valueToSet('*')">*</button> 
+       <button onclick="valueToSet('/')">/</button> 
+       <button onclick="valueToSet('.')">.</button> 
+       <button onclick="valueToSet('**')">^</button> 
+       <button onclick="valueToSet('x2')">x2</button> 
+       <button onclick="valueToSet('=')">=</button>
+
+       <!-- <button onclick="showText()">click</button> -->
+    </div>
+    
+   
+    <script src="./app.js"></script>
+</body>
+</html>
