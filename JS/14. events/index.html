@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #hr{
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+
+   <button onClick="fun(10)">click</button>
+
+    <a href="JavaScript:void(0)" 
+    onClick="alert('hello')"
+    onMouseOver="this.style.color='red'"
+    
+    >click me</a>
+    <br>
+    <div>
+        <input type="text" placeholder="enter name" onfocus="this.style.padding='5px'"
+    onBlur="formValidate(event)"
+
+    onInput="formValidate(event)"
+    >
+    <br>
+    <span id="nameError"></span>
+    </div>
+<br>
+    <img src="../.././HTML/Linking/assets/images/assigment.PNG"
+     onMouseOver="src='../.././HTML/Linking/assets/images/IMG_20241125_100321.jpg'"
+     onMouseOut="src='../.././HTML/Linking/assets/images/assigment.PNG'"
+     width="200px"
+     height="200px"
+     alt="">
+
+    <button >submit</button>
+
+<br>
+    <input type="password" name="" id="pass"><br>
+    <button onclick="passwordVisibililty()">show/hide</button>
+
+
+   <script src="./app.js"></script>
+</body>
+</html>
