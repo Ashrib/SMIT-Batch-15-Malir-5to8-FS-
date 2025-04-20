@@ -6,7 +6,6 @@ function showConsole(e){
   console.log(e.target.style.backgroundColor  )
 }
 
-var dataArray = ['ali','hamza','usman','maaz']
 var body = document.getElementsByTagName('body')[0]
 var colors = ['red','yellow','green','blue']
 
