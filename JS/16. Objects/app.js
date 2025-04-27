@@ -79,14 +79,28 @@ console.log(userResult.percent())
 // constructor
 function User(name,age){
   this.name = name;
+  this.class = "A";
   this.age = age;
+  this.show = function(){
+    console.log('name:' +this.name, "age:", this.age)
+  };
 }
-
 
 var user1 = new User('ali',30)
 var user2 = new User('usman',30)
 console.log(user1)
 console.log(user2)
+user1.show();
+
+
+
+
+
+
+for(key in user){
+  console.log(key,":", user[key])
+}
+
 
 
 
