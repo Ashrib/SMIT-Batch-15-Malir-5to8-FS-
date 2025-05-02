@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      .head, #center{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 20px;
+      }
+      .colorDiv,.empty{
+        height: 200px;
+        width: 200px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="main" >
+      <div class="head">
+        <div class="colorDiv" style="background-color: red;">color</div>
+        <div class="colorDiv" style="background-color: rgb(238, 255, 0);">color</div>
+        <div class="colorDiv" style="background-color: rgb(0, 153, 255);">color</div>
+      </div>
+
+
+      <div id="center">
+          text 
+        <div class="empty"><span></span></div>
+        <div class="empty"></div>
+        <div class="empty"></div>
+        <div class="empty"></div>
+        <div class="empty"></div>
+      </div>
+
+    </div>
+
+
+
+    <script src="./app.js"></script>
+  </body>
+</html>

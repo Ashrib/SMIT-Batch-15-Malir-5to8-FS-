@@ -83,3 +83,26 @@ function optGenerate(){
 
 console.log(optGenerate())
 console.log(optGenerate())
+
+
+// higher order functions
+function showName(){
+    console.log('Ali')
+}
+function greet(callBack){
+    console.log('hello!');
+    callBack()
+}
+greet(showName)
+
+function multi(x){
+        return function(y){
+            return x *y
+        }
+}
+var multiOf5 = multi(5);
+var multiOf8 = multi(8);
+
+console.log(multiOf5(10));
+console.log(multiOf5(4));
+console.log(multiOf8(5));
