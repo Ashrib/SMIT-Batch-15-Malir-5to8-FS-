@@ -109,21 +109,98 @@ console.log(nums.filter((item) => item%2 === 0))
 let users = [
     {
         age: 20,
-        city: 'karachi'
+        city: 'karachi',
+        id: 11
     },
     {
         age: 22,
-        city: 'karachi'
+        city: 'karachi',
+        id: 12
     },
     {
         age: 23,
-        city: 'lahore'
+        city: 'lahore',
+        id: 13,
+    },
+    {
+        age: 45,
+        city: 'lahore',
+        id: 14,
     }
 ];
 
 // filter users with age
 let filteredUsers = users.filter((user)=> user.age < 23);
 console.log(filteredUsers);
+
+
+let string = 'ali, usman, maaz, hamza';
+console.log(string.split(','));
+
+let nestedArray = [1,2,34,4,[45,57,78,435, [465,67,678,[78,354]]]];
+nestedArray = nestedArray.flat(Infinity)
+console.log(nestedArray)
+
+// for sorting array
+let chars = ['a','c','f','b'];
+let new_numbers = [4,6,8,300,23,1,3,400];
+console.log(chars.sort().reverse())
+console.log(new_numbers.sort((a,b) =>a-b))
+console.log(new_numbers.sort((a,b) =>b-a))
+
+console.log(nestedArray.indexOf(57))
+
+
+
+console.log(users.find((user)=> user.id == 15)) // find the user
+
+
+console.log(users.filter((user)=> user.id != 12))
+
+console.log(users.forEach((user)=> {
+    if(user.id == 12){
+        user.age = 30
+        user.city = 'lahore'
+    }
+}))
+console.log(users);
+
+
+console.log(users.map((user)=> {
+    if(user.id == 13){
+        user.city='karachi'
+    }
+    return user
+}))
+
+
+
+let updatedData = {// updated data
+    city: 'islamabad',
+    email:'abc@xyz.com',
+    contact: '03000000',
+}
+
+console.log(users.map((user)=>{
+    if(user.id == 14){
+        return user = {...user, ...updatedData}
+    }
+    return user;
+}))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
