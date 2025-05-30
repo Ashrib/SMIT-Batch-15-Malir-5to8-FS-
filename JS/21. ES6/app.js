@@ -119,7 +119,6 @@ let users = [
     },
     {
         age: 23,
-        city: 'lahore',
         id: 13,
     },
     {
@@ -187,19 +186,81 @@ console.log(users.map((user)=>{
     }
     return user;
 }))
+let age = 20;
+// ternary operator
+let newNum = (age>18)?
+
+(age < 25) ? 'yes' : 'no'
+:
+0 ;
+console.log(newNum)
+var a = false;
+var b = 100;
+console.log('nullish: ',a ?? b) // nullish operator
+
+console.log('OR: ', a || b)
 
 
+let arr3 = ["John", "Smith", "Caesar"]
+
+let [firstname, ,lastname] = arr3;
+console.log(firstname)
+console.log(lastname)
 
 
+let userData = {
+    username:'abc',
+    age:20,
+    address: {
+        city:'karachi',
+        area: 'A/30',
+    }
+    // ....
+}
+
+let {age : userage ,city, address} = userData;
+let { area } = address
+console.log(userage)
 
 
+let users2 = [
+    {
+        age: 20,
+        city: 'karachi',
+        id: 11
+    },
+    {
+        age: 22,
+        city: 'karachi',
+        id: 12
+    },
+    {
+        age: 23,
+        id: 13,
+    },
+    {
+        age: 45,
+        city: 'lahore',
+        id: 14,
+    }
+];
 
 
+// users2.map((user)=>{ // optional
+//     console.log(`user age: ${user?.age}\n
+//                 city: ${user?.city}
+//                 id: ${user?.id}
+//         `)
+// })
+
+// let filterData = users2.filter((user)=> user.id == 1)?.map()
 
 
-
-
-
+(
+     ()=>{
+        console.log('api fetch')
+    }
+)()
 
 
 
