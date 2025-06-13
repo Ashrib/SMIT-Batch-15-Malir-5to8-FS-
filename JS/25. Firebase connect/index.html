@@ -4,11 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #form{
+            border: 1px solid black;
+            padding: 20px 10px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .cards-box{
+            border: 1px solid black;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .card{
+            border: 1px solid black;
+            padding: 10px 5px;
+            display: flex;
+            flex-direction: column;
+
+        }
+        .btns{
+            display: flex;
+            justify-content: flex-end;
+        }
+        #update_btn{
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <button id="add_btn">add data</button>
-    <button id="delete_btn">delete data</button>
-    <button id="update_btn">update data</button>
+    <div class="main">
+        <form id="form" >
+            <input type="text" placeholder="enter your name" id="name">
+            <input type="email" placeholder="enter your email" id="email">
+            <input type="text" placeholder="enter your age" id="age">
+            <input type="text" placeholder="enter your address" id="address">
+            <input type="submit" value="Create" id="add_btn">
+            <input type="submit" value="Update" id="update_btn">
+        </form>
+
+        <div class="cards-box">
+
+        </div>
+    </div>
+
+
+
 
 
     <script src="https://www.gstatic.com/firebasejs/11.8.0/firebase-app-compat.js"></script>
