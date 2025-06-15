@@ -15,8 +15,8 @@ let readData = async () => {
     }
 }
 // delete data
-let deleteData = async(uid)=>{
-     try {
+let deleteData = async (uid) => {
+    try {
         await deleteDoc(doc(db, "users", uid)).then(() => {
             console.log('successfully deleted!')
             readData().then(() => {
@@ -27,27 +27,59 @@ let deleteData = async(uid)=>{
         console.error(error)
     }
 }
+// updateData
+let updateData = async (uid) => {
+    try {
+        console.log(uid)
+        let form = document.querySelector('#form')
+        const updateDocRef = doc(db, "users", uid);
+        await updateDoc(updateDocRef, {
+            name: form[0].value,
+            email: form[1].value,
+            age: form[2].value,
+            address: form[3].value,
+        }).then(() => {
+            console.log('successfully updated!')
+            readData().then(() => {
+                renderUsers()
+            })
+
+            form.reset() // to reset the form
+            document.querySelector('.update').style.display = 'none'
+            document.querySelector('#add_btn').style.display = 'block'
+        });
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 // edit data
 let editData = async (uid) => {
     let form = document.querySelector('#form')
-    form.removeEventListener('submit', createData) // remove previous event listener
-    
+
     console.log('edit', uid)
-   let findUser = users.find((user) => user.uid === uid)
+    let findUser = users.find((user) => user.uid === uid)
     form[0].value = findUser.name
     form[1].value = findUser.email
-    form[2].value = findUser.age   
-    form[3].value = findUser.address 
-    form.querySelector('#update_btn').style.display = 'block'
+    form[2].value = findUser.age
+    form[3].value = findUser.address
+    document.querySelector('.update').style.display = 'flex'
     form.querySelector('#add_btn').style.display = 'none'
-    document.querySelector('#update_btn').addEventListener('click',
-        ()=>{
-            console.log(form[0])
-        }
-    )
-     
+
+    let updateBtn = document.createElement("span")
+    updateBtn.id = 'update_btn'
+    updateBtn.innerText = "Update"
+    updateBtn.addEventListener('click', () => {
+        updateData(uid)
+    })
+    let updateDiv = document.querySelector('.update')
+    updateDiv.innerHTML = ''
+    updateDiv.appendChild(updateBtn)
 
 }
+
+
+
 
 let cardBoxDiv = document.querySelector('.cards-box')
 let renderUsers = () => { // render users card
@@ -81,7 +113,6 @@ readData().then(() => {
     renderUsers()
 })
 
-
 // create data
 let createData = async (e) => {
     e.preventDefault();
@@ -111,18 +142,3 @@ let createData = async (e) => {
 }
 
 document.querySelector('#form').addEventListener('submit', createData)
-
-
-// update Doc
-// document.querySelector('#update_btn').addEventListener('click', async () => {
-// try {
-//     const updateDocRef = doc(db, "users", users[0].uid);
-//     await updateDoc(updateDocRef, {
-//         city: 'karachi',
-//     }).then(()=>console.log('successfully updated!'));
-
-// } catch (error) {
-//     console.error(error)
-// }
-// })
-
