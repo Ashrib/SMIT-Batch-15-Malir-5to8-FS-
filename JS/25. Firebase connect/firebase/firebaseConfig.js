@@ -1,7 +1,7 @@
  // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
-  import { getFirestore,collection, getDocs, addDoc ,doc, deleteDoc, updateDoc} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
+  import {onSnapshot, getFirestore,collection, getDocs, addDoc ,doc, deleteDoc, updateDoc} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
   
   
   // TODO: Add SDKs for Firebase products that you want to use
@@ -25,4 +25,4 @@
   // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
-export {collection,getDocs, db, addDoc,doc, deleteDoc,updateDoc}
+export {onSnapshot,collection,getDocs, db, addDoc,doc, deleteDoc,updateDoc}

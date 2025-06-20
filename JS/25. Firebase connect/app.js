@@ -1,27 +1,34 @@
-import { collection, getDocs, db, addDoc, doc, deleteDoc, updateDoc } from './firebase/firebaseConfig.js'
+import { onSnapshot,collection, getDocs, db, addDoc, doc, deleteDoc, updateDoc } from './firebase/firebaseConfig.js'
 
 let users = [];
 //read data
-let readData = async () => {
-    try {
-        users = [];
-        const querySnapshot = await getDocs(collection(db, "users"));
-        querySnapshot.forEach((doc) => {
-            users.push({ uid: doc.id, ...doc.data() })
-        });
-        console.log("users=> ", users)
-    } catch (error) {
-        console.error(error)
-    }
-}
+
+const unsub = onSnapshot(collection(db, "users"), (res) => {
+    users = []
+    res?.docs?.forEach((doc)=>{
+        users.push({uid: doc?.id,...doc?.data()});
+    })
+    renderUsers();
+    console.log("data: ", users)
+});
+// let readData = async () => {
+//     try {
+//         users = [];
+//         const querySnapshot = await getDocs(collection(db, "users"));
+//         querySnapshot.forEach((doc) => {
+//             users.push({ uid: doc.id, ...doc.data() })
+//         });
+//         console.log("users=> ", users)
+//     } catch (error) {
+//         console.error(error)
+//     }
+// }
 // delete data
 let deleteData = async (uid) => {
     try {
         await deleteDoc(doc(db, "users", uid)).then(() => {
             console.log('successfully deleted!')
-            readData().then(() => {
-                renderUsers()
-            })
+            
         })
     } catch (error) {
         console.error(error)
@@ -40,9 +47,7 @@ let updateData = async (uid) => {
             address: form[3].value,
         }).then(() => {
             console.log('successfully updated!')
-            readData().then(() => {
-                renderUsers()
-            })
+           
 
             form.reset() // to reset the form
             document.querySelector('.update').style.display = 'none'
@@ -80,7 +85,6 @@ let editData = async (uid) => {
 
 
 
-
 let cardBoxDiv = document.querySelector('.cards-box')
 let renderUsers = () => { // render users card
     cardBoxDiv.innerHTML = ''  // to remove old data
@@ -108,10 +112,8 @@ let renderUsers = () => { // render users card
     })
 }
 
-// initial call to read data and render users
-readData().then(() => {
-    renderUsers()
-})
+
+
 
 // create data
 let createData = async (e) => {
@@ -131,14 +133,20 @@ let createData = async (e) => {
             address: e.target[3].value,
         });
 
-        readData().then(() => {
-            renderUsers()
-
-        })
+       
         console.log("Document written with ID: ", docRef.id);
     } catch (e) {
         console.error("Error adding document: ", e);
     }
 }
 
+
+let searchUser = ()=>{
+    let input = document.querySelector('#search-input').value
+    let findUser = users.find(user => user.email === input)
+    console.log(findUser)
+
+}
+
 document.querySelector('#form').addEventListener('submit', createData)
+document.querySelector('#search-btn').addEventListener('click', searchUser)
