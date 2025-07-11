@@ -70,4 +70,4 @@ onAuthStateChanged(auth, (user) => {
 
 
 
-
+document.querySelector('#google-signIn').addEventListener('click',()=>{})

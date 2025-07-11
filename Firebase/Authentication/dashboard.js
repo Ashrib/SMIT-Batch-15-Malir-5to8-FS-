@@ -15,13 +15,13 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-const unsub = onSnapshot(collection(db, "users"), (response) => {
-    users = []
-    response?.docs?.forEach((doc)=>{
-        users.push({id: doc?.id,...doc?.data()});
-    })
-    console.log("data: ", users)
-});
+// const unsub = onSnapshot(collection(db, "users"), (response) => {
+//     users = []
+//     response?.docs?.forEach((doc)=>{
+//         users.push({id: doc?.id,...doc?.data()});
+//     })
+//     console.log("data: ", users)
+// });
 
 
 
