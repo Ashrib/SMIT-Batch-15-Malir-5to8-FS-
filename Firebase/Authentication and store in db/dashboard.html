@@ -4,13 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <style>
+        .header{
+            display: flex;
+            justify-content: space-between;
+        }
+        .posts-box{
+            margin-top: 10px;
+        }
+        .post-card{
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body>
-
-    <h2 id="user-name"></h2>
+    <nav><div><a href="./chat.html">chats</a></div></nav>
+    <div class="header">
+        <h2 id="user-name"></h2>
 
     <button id="signout">sign Out</button>
+    </div>
 
+
+    <div>
+        <input type="text" placeholder="Enter a text to create post" id="post-input">
+        <button id="post-btn">create post</button>
+            <div class="update"></div>
+
+    </div>
+
+    <div class="posts-box">
+
+    </div>
 
     <script type="module" src="./dashboard.js"></script>
 </body>
