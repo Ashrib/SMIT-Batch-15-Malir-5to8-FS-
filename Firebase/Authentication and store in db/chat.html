@@ -27,14 +27,49 @@
             border: 2px solid black;
             padding: 5px 10px;
         }
+        .messages-box{
+            height: 85%;
+            background-color: rgb(223, 222, 222);
+            overflow-y: scroll;
+            display: flex;
+            flex-direction: column;
+            padding: 5px;
+        }
+        .sent-box{
+            height: 15%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .sent-box>input {
+            flex-grow: 1;
+        }
+        .left{
+            align-self: flex-start;
+        }
+        .right{
+            align-self: flex-end;
+
+        }
+        .msg{
+            background-color: antiquewhite;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
-    
+    <div id="name"></div>
+    <div><a href="./dashboard.html">back</a></div>
 
     <div class="main">
         <div class="users-list"></div>
-        <div class="chat-box"></div>
+        <div class="chat-box">
+            <div class="messages-box"></div>
+            <div class="sent-box">
+                <input id="message-inp" type="text" placeholder="send message">
+                <button id="send-btn">send</button>
+            </div>
+        </div>
     </div>
 
 
