@@ -20,7 +20,6 @@ let fetchCurrentUser = async () => {
     console.error("Error fetching current user:", error);
   }
 };
-// Call this function where you need current user data
 fetchCurrentUser().then(()=>{
   document.querySelector("#name").innerHTML = loginUser?.displayName
 })
