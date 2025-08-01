@@ -42,3 +42,10 @@ console.log(user1 instanceof UserAcc)
 
 
 
+
+
+let mixArray : (number | string)[] = []
+mixArray = ['a']
+
+
+let users : User[] = [{name:'',age:30}];
