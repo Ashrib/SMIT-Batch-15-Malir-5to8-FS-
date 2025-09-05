@@ -9,19 +9,27 @@ import Hall from './pages/hall.jsx'
 import Foodcourt from './pages/foodcourt.jsx'
 import Navbar from './components/Navbar.jsx'
 import FirstFloor from './pages/firstFloor.jsx'
+import Products from './pages/products.jsx'
+import Product from './pages/product.jsx'
 
 function App() {
 
   return (
     <>
-      {/* <Routes>
+      <Routes>
       <Route path='/' element={<LandingPage/>}/>
       <Route path='/aboutus' element={<AboutUs/>}/>
       <Route path='/home' element={<Home/>}/>
+      <Route path='/products' >
+        <Route index element={<Products/>}/>
+        <Route path=':id' element={<Product/>}/>
+      </Route>
+      
       <Route path='*' element={<h2>not found</h2>}/>
-     </Routes> */}
 
-      <Routes>
+     </Routes>
+
+      {/* <Routes>
         <Route path='/' element={
           <>
             <Navbar />
@@ -42,7 +50,7 @@ function App() {
           <Route index element={<Hall />} />
           <Route path='foodcourt' element={<Foodcourt />} />
         </Route>
-      </Routes>
+      </Routes> */}
 
     </>
   )
