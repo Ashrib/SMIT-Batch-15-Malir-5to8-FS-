@@ -11,12 +11,16 @@ import Navbar from './components/Navbar.jsx'
 import FirstFloor from './pages/firstFloor.jsx'
 import Products from './pages/products.jsx'
 import Product from './pages/product.jsx'
+import Register from './pages/register.jsx'
+import Login from './pages/login.jsx'
 
 function App() {
+  let isLogin = true
+  let isAdmin = false
 
   return (
     <>
-      <Routes>
+      {/* <Routes>
       <Route path='/' element={<LandingPage/>}/>
       <Route path='/aboutus' element={<AboutUs/>}/>
       <Route path='/home' element={<Home/>}/>
@@ -27,7 +31,7 @@ function App() {
       
       <Route path='*' element={<h2>not found</h2>}/>
 
-     </Routes>
+     </Routes> */}
 
       {/* <Routes>
         <Route path='/' element={
@@ -51,6 +55,29 @@ function App() {
           <Route path='foodcourt' element={<Foodcourt />} />
         </Route>
       </Routes> */}
+
+
+        {/* protected routes */}
+        {(isLogin)? 
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/home' element={<Home/>}/>
+          <Route path='/aboutus' element={<AboutUs/>}/>
+          <Route path='/products' element={<Products/>}/>
+          <Route path='/login' element={<Home/>}/>
+          <Route path='/register' element={<Home/>}/>
+          {isAdmin && <Route path='/adminpanel' element={<h2>Admin Panel</h2>}/>}
+
+          <Route path='*' element={<h2>not found</h2>}/>
+        </Routes>
+      : 
+        <Routes>
+          <Route path='/' element={<LandingPage/>}/>
+          <Route path='/register' element={<Register/>}/>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='*' element={<Login/>}/>
+        </Routes>
+      }
 
     </>
   )
