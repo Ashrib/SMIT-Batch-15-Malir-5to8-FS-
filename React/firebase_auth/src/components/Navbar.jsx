@@ -1,7 +1,26 @@
-import React from 'react'
-import { Link } from 'react-router'
+import React, { useContext } from 'react'
+import { Link, useNavigate } from 'react-router'
+import { AuthContext } from '../context/AuthContext'
+import { auth } from '../firebase/firebaseConfig'
+import { signOut } from 'firebase/auth'
 
 const Navbar = () => {
+    const { user, setUser } = useContext(AuthContext)
+  const navigate = useNavigate()
+
+    let logoutHandler = () => {
+        try {
+            signOut(auth).then(() => {
+                // Sign-out successful.
+                setUser(null)
+                navigate('/auth/login');
+            })
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+
     return (
         <>
             {/* Include this script tag or install `@tailwindplus/elements` via npm: */}
@@ -91,23 +110,40 @@ const Navbar = () => {
                             </div>
                         </div>
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                            {
+                                (user) ?
 
-                            <Link to={'/auth/register'}>
-                                <button
-                                    type="button"
-                                    className="relative rounded-full p-1 text-white hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
-                                >
-                                    Register
-                                </button>
-                            </Link>
-                            <Link to={'/auth/login'}>
-                                <button
-                                    type="button"
-                                    className="relative rounded-full p-1 text-white hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
-                                >
-                                    Login
-                                </button>
-                            </Link>
+                                    <button
+                                        onClick={() => logoutHandler()}
+                                        type="button"
+                                        className="relative rounded-full p-1 text-white hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
+                                    >
+                                        Logout
+                                    </button>
+
+                                    :
+
+
+                                    <div>
+
+                                        <Link to={'/auth/register'}>
+                                            <button
+                                                type="button"
+                                                className="relative rounded-full p-1 text-white hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
+                                            >
+                                                Register
+                                            </button>
+                                        </Link>
+                                        <Link to={'/auth/login'}>
+                                            <button
+                                                type="button"
+                                                className="relative rounded-full p-1 text-white hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
+                                            >
+                                                Login
+                                            </button>
+                                        </Link>
+                                    </div>
+                            }
                         </div>
                     </div>
                 </div>

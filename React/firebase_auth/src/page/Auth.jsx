@@ -5,6 +5,7 @@ import { Outlet } from 'react-router'
 const Auth = () => {
   return (
     <>
+        <Navbar/>
         <span className='text-2xl'>This is Auth Route</span>
         <Outlet/>
     </>

@@ -20,6 +20,7 @@ const Register = () => {
           const user = userCredential.user;
           console.log(user)
           setUser(user)
+          
           // ...
         })
     } catch (error) {

@@ -18,17 +18,19 @@ function App() {
       {user ?
 
         <Routes>
-          <Route path='/' element={<Dashboard />} />
-          <Route path='*' element={<Dashboard />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+          
+          <Route path='*' element={<h2>404 not found</h2>} />
         </Routes>
         :
-
+        
         <Routes>
           <Route path='/' element={<LandingPage />} />
           <Route path='/auth' element={<Auth />}>
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />
           </Route>
+          <Route path='*' element={<h2>404 not found</h2>} />
         </Routes>
       }
 
