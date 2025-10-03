@@ -13,32 +13,62 @@ function App() {
   const [pass2, setPass2] = useState('')
 
   const formSchema = yup.object({
+    username: yup.string().required().min(3,'minimum 3 characters required!'),
     email: yup.string().required().email(),
     password: yup.string().required()
-      .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, 'min eight characters, at least one letter, one number and one special character!'),
+      // .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, 'min eight characters, at least one letter, one number and one special character!')
+      ,
     gender: yup.string().required(),
-    skills: yup.array().length(1,'select at least 1 skill'),
+    skills: yup.array().min(1,'select at least 1 skill'),
+    images: yup.array(),
   })
-
 
   const {
     handleSubmit,
     register,
     watch,
-    formState: { errors }
+    reset,
+    setValue,
+    formState: { errors,isSubmitting }
   } = useForm({
+    defaultValues:{
+      username: 'user123',
+      email: 'abc@example.com',
+    },
     resolver: yupResolver(formSchema)
   })
 
 
 
-  let formSubmitHandler = (data) => {
+  const  [userInp , emailInp]  = watch(['username','email'])
+
+  let formSubmitHandler = async(data) => {
     console.log(data)
 
+    await new Promise((res,rej)=>{
+      setTimeout(()=>{
+        reset({
+          email:'',
+          username:'',
+          skills:''
+        })
+        res()
+      },3000)
+    })
   } 
 
 
- 
+  let user = { // mock data
+    username: 'asharib',
+    email: 'asharib@gmail.com',
+  }
+
+ const fillDetails = ()=>{
+    setValue('username', user.username)
+    setValue('email', user.email)
+ }
+
+
 
 
   return (
@@ -47,14 +77,21 @@ function App() {
         className='flex flex-col p-8'
       >
         <div className='flex flex-col'>
+          <input placeholder='username' type='text' {...register('username')} />
+          {errors.username && <span className='text-[0.5em] text-red-700'>{errors.username.message}</span>}
+        </div>
+        <div className='flex flex-col'>
           <input placeholder='email' type='text' {...register('email')} />
           {errors.email && <span className='text-[0.5em] text-red-700'>{errors.email.message}</span>}
         </div>
+
 
         <div className='flex flex-col'>
           <input  placeholder='password' type='password' {...register('password')} />
           {errors.password && <span className='text-[0.5em] text-red-700'>{errors.password.message}</span>}
         </div>
+
+
 
         <div className='flex flex-col'>
           <input onChange={(e)=>setPass2(e.target.value)} placeholder='confirm password' type='password' />
@@ -95,8 +132,8 @@ function App() {
           {errors.skills && <span className='text-[0.5em] text-red-700'>{errors.skills.message}</span>}
         </div>
 
-
-        <input type="submit" />
+        <button onClick={()=> fillDetails()}>fill according to my account details</button>
+        <input type="submit" value={isSubmitting? 'submitting': 'submit'}/>
       </form>
     </>
   )
