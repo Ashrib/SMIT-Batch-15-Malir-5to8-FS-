@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { Box, Button, TextField, Typography } from '@mui/material'
+import { Box, Button, TextField, Typography,Grid } from '@mui/material'
 import Navbar from './components/NavBar'
 import HomeIcon from '@mui/icons-material/Home';
 import { useForm, Controller } from "react-hook-form"
@@ -75,11 +75,8 @@ function App() {
           )
         })
       }
-
-
     
     </Box> */}
-
 
       <Box sx={
         {
@@ -118,6 +115,29 @@ function App() {
           >Submit</Button>
         </form>
       </Box>
+
+            <Grid container  columnGap={'15px'} sx={{
+              border:'1px solid black'
+            }}>
+              <Grid size={6} sx={{
+                backgroundColor: 'red'
+              }}>
+                left box
+              </Grid>
+              <Grid size={3} sx={{
+                backgroundColor: 'blue'
+              }}>
+                left box
+              </Grid>
+
+            </Grid>
+
+
+
+
+
+
+
     </Box>
   )
 }
