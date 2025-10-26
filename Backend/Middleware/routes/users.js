@@ -39,7 +39,6 @@ userRoutes.post('/', (req, res) => {
     })
 })
 
-
 userRoutes.delete('/:id', (req, res) => {
     const { id } = req.params
 
@@ -62,4 +61,4 @@ userRoutes.delete('/:id', (req, res) => {
 
 })
 
-export default userRoutes
+export default userRoutes;
