@@ -6,7 +6,41 @@ const userRoutes = express.Router();
 
 userRoutes.get('/', async (req, res) => {  //get mongodb users
     try {
-        let users = await User.find();
+        let queryObj = {}
+        let queries = req.query;
+        console.log(queries)
+
+        //age , limit   
+        if(queries.ageLt && queries.ageGt){
+            queryObj = {
+                ...queryObj,
+                age: { $lt: queries.ageLt, $gt: queries.ageGt }
+            }
+        }
+        
+        if(queries.ageGt && !queries.ageLt){
+            queryObj = {
+                ...queryObj,
+                age: { $gt: queries.ageGt }
+            }
+        }
+
+        if(queries.ageLt && !queries.ageGt){
+            queryObj = {
+                ...queryObj,
+                age: { $lt: queries.ageLt }
+            }
+        }
+        // if(queries.limit){
+        //     queryObj = {
+        //         ...queryObj,
+        //         limit: { $gt: 20 }
+        //     }
+        // }
+
+        let users = await User.find({
+            ...queryObj
+        });
         res.json({
             message: "successfully get users. ",
             users: users,
@@ -19,6 +53,7 @@ userRoutes.get('/', async (req, res) => {  //get mongodb users
         })
     }
 });
+
 
 
 userRoutes.get('/:id', async (req, res) => {  //get specific mongodb user with _id
@@ -86,6 +121,35 @@ userRoutes.post('/', async (req, res) => { // create user in mongodb
 });
 
 
+userRoutes.put('/:id', async (req, res) => { // update user in mongodb
+    const { id } = req.params;
+    const { name, age, email } = req.body;
+    if (!req.body) { // validate the body
+        return res.status(400).json({
+            message: 'invaild data for creating user!',
+            code: 400,
+        })
+    }
+
+
+    try {
+        let newUser = await User.findByIdAndUpdate(id, { ...req.body }, { new: true });
+
+        res.json({
+            message: `successfully updated this user id ${id}`,
+            user: newUser,
+            // code: 400,
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: 'error in updating user!',
+            code: 500,
+        })
+    }
+
+});
+
 userRoutes.delete('/:id', async (req, res) => {  //get specific mongodb user with _id
     try {
         const { id } = req.params;
@@ -111,6 +175,11 @@ userRoutes.delete('/:id', async (req, res) => {  //get specific mongodb user wit
         })
     }
 });
+
+
+
+
+
 
 
 
