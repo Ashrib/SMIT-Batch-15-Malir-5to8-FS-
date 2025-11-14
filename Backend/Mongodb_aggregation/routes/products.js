@@ -25,7 +25,6 @@ productRoutes.get('/', async (req, res) => {
 })
 
 
-
 productRoutes.post('/', async (req, res) => {
     try {
         let body = req.body;
@@ -52,31 +51,50 @@ productRoutes.post('/', async (req, res) => {
 // filter
 productRoutes.get('/filter', async (req, res) => {
     try {
-        let queries = req.query
-        console.log(queries)
-        // console.log(queries.price.split(','))
-        // let products = await Product.find({
-        // price: queries.price.split(',')
-        // });
+        let products = await Product.aggregate([
+            // {//stage 1
+                // $match: { //query
+                //      price: {$gt:72} ,
+                //      rating: 5,
+                //      // ......
+                // }
+            // },
+            // {  // grouping the data
+            //     $group:{
+            //         _id:"$price",
+            //         totalProduct: {$sum: 1},
+            //     }
+            // },
+            // {  // to add the fields if needed
+            //     $addFields:{
+            //         // fullName: {$concat:['$name', " ", { $toString: "$price" }]}
+            //         countCategory: {$size: "$category"},
+            //         test: 'abc',
+            //     }
+            // },
 
-        // for getting selected fields only 
-        // let products = await Product.find({}).select(" name price");  // -category
-        // let products = await Product.find({}, "-rating -price");
 
-        let products = await Product.find({
-            // price: {$lt: 39, $gt:12}
-            // category: {$in:['sports', 'manual']},
-            // $or:[{category: {$size: 3}}, {category: {$size:1}}],
-            
-            // updatedAt: { $gt: '2025-11-09T12:57:41.255+00:00' }
-            // des:{$regex:'ali', $options:'i'}  // 'i' is for case-insensitive
-        })
-        // .limit(3)
-        // .skip(20)
-        // .countDocuments();
+            {
+                // specify the required fields
+             $project:   {  
+                // _id: 1,
+                // price:1,
+                des: 0,
+             }
+            },
+
+            // {
+            //     $unwind: "$category"
+            // }
+            //stage 2
+            //stage 3
+        ]);  //
 
 
-        //   59.99 , 79.99
+
+
+
+
         return res.json({
             data: products,
             message: 'fetched all products',
