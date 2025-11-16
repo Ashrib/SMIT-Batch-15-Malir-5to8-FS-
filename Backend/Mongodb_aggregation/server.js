@@ -3,11 +3,16 @@ import "dotenv/config"
 import mongoose from "mongoose";
 import productRoutes from "./routes/products.js";
 import userRoutes from "./routes/user.js";
-
+import cors from 'cors'
 
 const app = express();
 app.use(express.json())
+app.use(cors())
+
+
 let db_url = process.env.MONGODB_URL;
+
+
 
 
 app.use('/products', productRoutes)
