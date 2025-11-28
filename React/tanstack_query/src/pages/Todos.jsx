@@ -11,6 +11,7 @@ function Todos() {
     let data = await getTodos();
     return data
   }
+  
    let postTodoHandle = async(todoData)=>{ //post requests
     let data = await postTodos(todoData);
     return data
