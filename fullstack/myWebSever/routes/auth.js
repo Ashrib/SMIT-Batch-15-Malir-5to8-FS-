@@ -57,7 +57,7 @@ const loginSchema = Joi.object({
 // register the user
 authRoutes.post('/register', async (req, res) => {
     try {
-        const { firstName, lastName, age, email, password } = req.body;
+        const { firstName, lastName, age, email, password,isAdmin } = req.body;
 
         let { error, value } = registerSchema.validate(req.body)
         if (error) { throw new Error(error.details[0].message) }
@@ -70,15 +70,15 @@ authRoutes.post('/register', async (req, res) => {
 
         // If your User model expects a single `name` field, map firstName+lastName
         const name = `${firstName} ${lastName}`.trim()
-        let newAccount = new User({ name: name, firstName, lastName, age, email, password: hashPassword });
+        let newAccount = new User({ name: name, firstName, lastName, age, email, password: hashPassword, isAdmin });
         await newAccount.save()
 
-        let createdToken = jwt.sign({ name,firstName,lastName, age, email }, process.env.JWT_SECRET, { expiresIn: '1h' })
+        let createdToken = jwt.sign({ name,firstName,lastName, age, email,isAdmin }, process.env.JWT_SECRET, { expiresIn: '1h' })
 
         res.send({
             message: 'account created',
             token: createdToken,
-            data: { firstName, lastName, age, email }
+            data: { firstName, lastName, age, email, isAdmin     }
         })
 
     } catch (error) {
@@ -119,6 +119,7 @@ authRoutes.post("/login", async (req, res) => {
             firstName: findUser.firstName,
             age: findUser.age,
             email: email,
+            isAdmin: findUser.isAdmin
         }, process.env.JWT_SECRET,
             { expiresIn: '1h' }
         )
@@ -130,6 +131,9 @@ authRoutes.post("/login", async (req, res) => {
                 name: findUser.name,
                 age: findUser.age,
                 email: email,
+                firstName: findUser.firstName,
+                lastName: findUser.lastName,
+                isAdmin: findUser.isAdmin
             },
         })
     } catch (error) {
@@ -138,6 +142,29 @@ authRoutes.post("/login", async (req, res) => {
         })
     }
 })
+
+
+authRoutes.get('/user', async (req, res) => {
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+
+        if (!token) {
+            return res.status(401).send({ message: 'Access denied. No token provided.' });
+        }
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        if (!decoded) {
+            return res.status(400).send({ message: 'Invalid token.' });
+        }
+
+        console.log("decoded token:", decoded);
+        res.status(200).send({ message: 'Token is valid.', data: decoded });
+
+
+
+    } catch (error) {
+        res.status(500).send({ message: 'Internal server error', error: error.message });
+    }
+});
 
 
 
