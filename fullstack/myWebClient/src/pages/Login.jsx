@@ -38,6 +38,7 @@ const Login = () => {
   let loginFormSubmit = async (data) => {
     try {
       let response = await axios.post('http://localhost:3000/auth/login', data)
+      console.log(response);
       console.log(response.data.token);
       Cookie.set('token', response.data.token);
       updateUser(response.data.data)

@@ -57,7 +57,7 @@ const loginSchema = Joi.object({
 // register the user
 authRoutes.post('/register', async (req, res) => {
     try {
-        const { firstName, lastName, age, email, password,isAdmin } = req.body;
+        const { firstName, lastName, age, email, password, isAdmin } = req.body;
 
         let { error, value } = registerSchema.validate(req.body)
         if (error) { throw new Error(error.details[0].message) }
@@ -71,14 +71,16 @@ authRoutes.post('/register', async (req, res) => {
         // If your User model expects a single `name` field, map firstName+lastName
         const name = `${firstName} ${lastName}`.trim()
         let newAccount = new User({ name: name, firstName, lastName, age, email, password: hashPassword, isAdmin });
-        await newAccount.save()
+        let newData = await newAccount.save()
+        console.log("new data", newData)
 
-        let createdToken = jwt.sign({ name,firstName,lastName, age, email,isAdmin }, process.env.JWT_SECRET, { expiresIn: '1h' })
+        // let createdToken = jwt.sign({ name, firstName, lastName, age, email, isAdmin, id: newData?._id }, process.env.JWT_SECRET, { expiresIn: '1h' })
+        let createdToken = jwt.sign({id: newData?._id}, process.env.JWT_SECRET, { expiresIn: '1h' })
 
         res.send({
             message: 'account created',
             token: createdToken,
-            data: { firstName, lastName, age, email, isAdmin     }
+            data: { firstName, lastName, age, email, isAdmin, id: newData?._id }
         })
 
     } catch (error) {
@@ -113,16 +115,23 @@ authRoutes.post("/login", async (req, res) => {
             })
         }
 
-           let createdToken = jwt.sign({
-            name: findUser.name,
-            lastName: findUser.lastName,
-            firstName: findUser.firstName,
-            age: findUser.age,
-            email: email,
-            isAdmin: findUser.isAdmin
-        }, process.env.JWT_SECRET,
+        console.log("checkpass: ",checkPassword)
+        let createdToken = jwt.sign({id:findUser._id}
+            , process.env.JWT_SECRET,
             { expiresIn: '1h' }
         )
+        console.log("login token:", createdToken)
+        // let createdToken = jwt.sign({
+        //     name: findUser.name,
+        //     lastName: findUser.lastName,
+        //     firstName: findUser.firstName,
+        //     age: findUser.age,
+        //     email: email,
+        //     isAdmin: findUser.isAdmin,
+        //     id: findUser._id
+        // }, process.env.JWT_SECRET,
+        //     { expiresIn: '1h' }
+        // )
 
         res.status(200).send({
             message: 'successful login',
@@ -133,7 +142,8 @@ authRoutes.post("/login", async (req, res) => {
                 email: email,
                 firstName: findUser.firstName,
                 lastName: findUser.lastName,
-                isAdmin: findUser.isAdmin
+                isAdmin: findUser.isAdmin,
+                id: findUser._id
             },
         })
     } catch (error) {
@@ -157,7 +167,12 @@ authRoutes.get('/user', async (req, res) => {
         }
 
         console.log("decoded token:", decoded);
-        res.status(200).send({ message: 'Token is valid.', data: decoded });
+
+        let getUser = await User.findById(decoded?.id)
+        console.log("user from db with decoded id", getUser)
+
+
+        res.status(200).send({ message: 'Token is valid.', data: getUser });
 
 
 

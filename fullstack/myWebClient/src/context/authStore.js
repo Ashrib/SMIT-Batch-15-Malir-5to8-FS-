@@ -11,7 +11,7 @@ import axios from 'axios'
           Authorization: `Bearer ${token}`,
         }
       })
-      // console.log("user data from authStore:", response.data.data);
+      console.log("user data from authStore:", response);
       useAuth.setState({ user: response.data.data });
   }
   } catch (error) {

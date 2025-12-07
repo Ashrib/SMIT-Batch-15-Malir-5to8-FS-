@@ -25,7 +25,6 @@ const EditUser = () => {
     });
 
     console.log("data from useQuery in UsersPage:", data);
-
     console.log("Editing user with id:", id);
 
   return (

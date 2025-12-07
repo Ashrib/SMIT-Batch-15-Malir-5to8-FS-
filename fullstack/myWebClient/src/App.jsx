@@ -11,11 +11,17 @@ import useAuth from './context/authStore.js'
 import UsersPage from './pages/UsersPage.jsx'
 import PostsPage from './pages/PostsPage.jsx'
 import EditUser from './pages/EditUser.jsx'
+import EditAccount from './pages/EditAccount.jsx'
+import Chat from './pages/Chat.jsx'
+import useUsers from './context/usersContext.js'
 
 function App() {
   let navigate = useNavigate()
 
 let auth = useAuth((state)=> state.user)
+let users = useUsers((state)=> state.users)
+console.log("users in app.jsx:", users);
+
 
 // if(auth){
 //   navigate('/')
@@ -30,6 +36,8 @@ let auth = useAuth((state)=> state.user)
         <Route path="/users" element={<UsersPage />} />
         <Route path="/posts" element={<PostsPage />} />
         <Route path="/user/edit/:id" element={<EditUser />} />
+        <Route path="/editAccount" element={<EditAccount />} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="*" element={<h2>404 not found</h2>} /> 
     </Routes>
 

@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import authRoutes from "./routes/auth.js";
 import cors from 'cors'
 import usersRoutes from "./routes/users.js";
+import messageRoutes from "./routes/messages.js";
 
 var corsOptions = {
     origin: '*',
@@ -21,6 +22,7 @@ let db_url = process.env.MONGODB_URL;
 
 app.use('/auth', authRoutes)
 app.use('/users', usersRoutes)
+app.use('/messages', messageRoutes)
 
 app.get('/', (req, res) => {
     res.send('app is running')
