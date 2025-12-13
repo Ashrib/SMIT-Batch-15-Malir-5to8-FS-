@@ -2,6 +2,8 @@ import express from "express"
 import mongoose from "mongoose";
 import jwt from 'jsonwebtoken';
 import "dotenv/config"
+import Message from "../models/messages/messageModel.js";
+import User from "../models/users/userModel.js";
 
 
 const messageRoutes = express.Router();
@@ -40,13 +42,62 @@ let authenticateUser = async (req, res, next) => {
 messageRoutes.use(authenticateUser); //router level
 
 
-// messageRoutes.get("/",(req,res)=>{
+messageRoutes.get("/", async (req, res) => {
+    try {
+        let { to, from } = req.query;
+    console.log("to: ", to)
+    console.log("from: ", from)
 
-// })
+    if (!to || !from) {
+        return res.status(400).send({
+            message: "invalid data!"
+        })
+    }
+
+    let messageFilter = {
+        $or: [
+            { to: to, from: from },
+            { to: from, from: to } // 'from' is the one who is logined and 'to' is the selected user
+        ]
+    }
+
+    let messages = await Message.find(messageFilter).sort({ createdAt: 1 })
 
 
-messageRoutes.post("/",(req,res)=>{
-    
+    res.status(200).json({
+        message: "messages successfully fetched",
+        data: messages,
+    })
+    } catch (error) {
+        res.status(500).json({
+            message: "error in fetching messages!",
+        })
+    }
+})
+
+
+messageRoutes.post("/", async (req, res) => {
+    try {
+        let { text, to, from } = req.body;
+        if (!text || !to || !from) {
+            return res.status(400).send({
+                message: "invalid data!"
+            })
+        }
+
+        let newMessage = new Message({ ...req.body });
+        await newMessage.save();
+
+        return res.status(200).json({
+            message: "message successfully sent",
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "error in message sent!",
+        })
+    }
+
+
 })
 
 

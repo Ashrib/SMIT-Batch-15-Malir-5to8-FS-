@@ -21,7 +21,7 @@ import axios from 'axios'
 
 const useAuth = create((set) => ({
   user: null,
-    updateUser: (newUser) => set({ user: newUser }),
+  updateUser: (newUser) => set({ user: newUser }),
 }))
 
 export default useAuth

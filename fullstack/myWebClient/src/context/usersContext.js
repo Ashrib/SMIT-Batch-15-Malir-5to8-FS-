@@ -30,7 +30,6 @@ const useUsers = create((set) => ({
   },
   updateUsers: (newUsers) => {set({users: [...newUsers]})}
 
-
 }))
 
 export default useUsers
