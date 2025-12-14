@@ -8,6 +8,8 @@ import axios from 'axios';
 import Cookie from "js-cookie"
 import useAuth from '../context/authStore.js';
 import { useQuery } from '@tanstack/react-query'
+import socket from '../utilities/socket.js';
+import { useRef } from 'react';
 
 const Chat = () => {
     const messageSchema = yup.object({
@@ -15,12 +17,17 @@ const Chat = () => {
     });
     const [btnDisabled, setBtnDisabled] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
+    const webSocket = useRef(socket);
+    console.log("webSocket in Chat.jsx:", webSocket);
     console.log("selectedUser in Chat.jsx:", selectedUser);
 
     let { user } = useAuth()
     console.log("Auth", user)
 
     let token = Cookie.get('token');
+
+
+
 
 
     let filterSelectedUser = useUsers((state) => state.users.find((user) => user?._id === selectedUser));
@@ -73,7 +80,7 @@ const Chat = () => {
     }
 
 
-    const { data: messagesData, isLoading } = useQuery({
+    const { data: messagesData, isLoading,refetch } = useQuery({
         queryKey: ['messages', selectedUser],
         queryFn: () => fetchMessages(),
         enabled: !!selectedUser && !!user._id
@@ -86,6 +93,26 @@ const Chat = () => {
         (watch('text').length > 0) ? setBtnDisabled(false) : setBtnDisabled(true);
 
     }, [watch('text')]);
+
+
+    useEffect(() => {
+        socket.on('message',(data)=>{
+            console.log( "  data from socket.io server in chat.jsx:",);
+            if(data.message === "message sent"){
+                refetch();
+            }
+        });
+
+
+         return () => {
+            socket.off('message');
+        }
+    }, []);
+
+
+
+
+
 
 
     return (
@@ -109,14 +136,14 @@ const Chat = () => {
 
                     </div>
                     <div className='h-[100%] w-3/4 bg-orange-300 relative '>
-                        <div className="messages-container h-full bg-gray-300">
+                        <div className="messages-container h-full bg-gray-300 ">
                             {(!selectedUser) ?
 
                                 <span>start chat</span>
                                 :
                                     (messagesData?.length > 0)
                                         ?
-                                        <div className='h-full bg-gray-300 flex flex-col'>
+                                        <div className='h-full bg-gray-300 flex flex-col overflow-scroll'>
                                         {messagesData?.map((msg) => (
                                             <div className={`${msg?.to == (user?._id || user.id) ? 'self-start  bg-blue-200': 'self-end  bg-green-200'}
                                             p-2 rounded-md m-2 mx-6

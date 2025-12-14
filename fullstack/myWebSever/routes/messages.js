@@ -6,6 +6,7 @@ import Message from "../models/messages/messageModel.js";
 import User from "../models/users/userModel.js";
 
 
+export default (io) => {
 const messageRoutes = express.Router();
 
 
@@ -88,9 +89,15 @@ messageRoutes.post("/", async (req, res) => {
         let newMessage = new Message({ ...req.body });
         await newMessage.save();
 
+        io.emit('message', {
+            message: "message sent"
+        });
+        
         return res.status(200).json({
             message: "message successfully sent",
         })
+
+
     } catch (error) {
         res.status(500).json({
             message: "error in message sent!",
@@ -103,4 +110,5 @@ messageRoutes.post("/", async (req, res) => {
 
 
 
-export default messageRoutes;
+return messageRoutes;
+}
