@@ -63,6 +63,14 @@
 </head>
 
 <body>
+    <button id="hello1">send hello to room 1</button>
+    <br>
+    <div>
+        <button id="room_btn1">join room 1</button>
+        <button id="leave_btn1">leave room 1</button>
+    </div>
+    <button id="room_btn2">join room 2</button>
+    <button id="bothroom_btn">join both rooms </button>
     <ul id="messages"></ul>
     <form id="form" action="">
         <input id="input" autocomplete="off" /><button>Send</button>
@@ -74,10 +82,14 @@
     <script>
         const socket = io();
 
-
+        const helloBtn1 = document.getElementById("hello1");
+        const roomBtn1 = document.getElementById("room_btn1");
+        const roomBtn2 = document.getElementById("room_btn2");
+        const leaveBtn1 = document.getElementById("leave_btn1");
+        const bothroomBtn = document.getElementById("bothroom_btn");
         const form = document.getElementById('form');
         const input = document.getElementById('input');
-         const messages = document.getElementById('messages');
+        const messages = document.getElementById('messages');
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -87,8 +99,32 @@
             }
         });
 
+
+        roomBtn1.addEventListener('click', () => {
+            socket.emit('joinRoom1');
+        })
+        roomBtn2.addEventListener('click', () => {
+            socket.emit('joinRoom2');
+        })
+        bothroomBtn.addEventListener('click', () => {
+            socket.emit('joinBothRoom');
+        })
+
+
+        leaveBtn1.addEventListener('click', () => {
+            socket.emit('leaveRoom1');
+        })
+
+        helloBtn1.addEventListener('click', () => {
+            socket.emit('sendRoom1', 'hello to room1 members');
+        })
+
         socket.on("hello", (msg) => {
             console.log(msg)
+        })
+
+        socket.on('room1Chat', (data) => {
+            console.log(data)
         })
 
         socket.on('chat message', (msg) => {
