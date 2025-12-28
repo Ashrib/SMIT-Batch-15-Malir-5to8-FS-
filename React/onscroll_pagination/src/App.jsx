@@ -17,7 +17,6 @@ function App() {
     setProducts((prev) => [...prev, ...products.data.products]);
     return products?.data;
   }
-
   let { data, isLoading, isError } = useQuery({
     queryKey: ['products', skips],
     queryFn: fetchProducts,
