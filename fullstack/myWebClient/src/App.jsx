@@ -14,6 +14,7 @@ import EditUser from './pages/EditUser.jsx'
 import EditAccount from './pages/EditAccount.jsx'
 import Chat from './pages/Chat.jsx'
 import useUsers from './context/usersContext.js'
+import ProfilePic from './pages/ProfilePic.jsx'
 
 function App() {
   let navigate = useNavigate()
@@ -42,6 +43,7 @@ console.log("users in app.jsx:", users);
         <Route path="/user/edit/:id" element={<EditUser />} />
         <Route path="/editAccount" element={<EditAccount />} />
         <Route path="/chat" element={<Chat />} />
+        <Route path="/profile-pic" element={<ProfilePic />} />
         <Route path="*" element={<h2>404 not found</h2>} /> 
     </Routes>
 

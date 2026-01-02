@@ -12,12 +12,14 @@
   "description": "",
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "cloudinary": "^2.8.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "joi": "^18.0.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^9.0.0",
+    "multer": "^2.0.2",
     "socket.io": "^4.8.1"
   }
 }

@@ -3,8 +3,15 @@ import User from "../models/users/userModel.js";
 import mongoose from "mongoose";
 import jwt from 'jsonwebtoken';
 import "dotenv/config"
+import multer from "multer";
+import cloudinary from '../config/cloudinary.js'
+import messages from "./messages.js";
 
 const usersRoutes = express.Router();
+
+const storage = multer.memoryStorage(); //RAM
+const upload = multer({ storage }); /// middleware
+
 
 let authenticateUser = async (req, res, next) => {
     try {
@@ -85,10 +92,10 @@ usersRoutes.get('/:id', async (req, res) => {  //get mongodb users
 usersRoutes.put('/updateAccount/:id', async (req, res) => {
     try {
         console.log("updateaccount body:", req.body)
-        let {id} = req.params;
+        let { id } = req.params;
         let body = req.body;
         let reqUser = req.user
-        console.log("id for update req: ",id)
+        console.log("id for update req: ", id)
 
         let userData = await User.findById(id || reqUser?._id).select('-password -__v -createdAt'); // exclude password and __v fields
 
@@ -131,5 +138,32 @@ usersRoutes.put('/updateAccount/:id', async (req, res) => {
 })
 
 
+
+usersRoutes.post('/profile-upload', upload.single('profilePic'), async(req, res) => {
+    let reqUser = req.user
+    let file = `data:image/png;base64,${req.file.buffer.toString('base64')}`
+    console.log(file);
+    console.log(reqUser)
+
+    let cloudinaryResult = await cloudinary.uploader.upload(file,{folder: 'avatars', public_id:`${reqUser?._id}`})
+    console.log(cloudinaryResult.secure_url)
+
+    if(!cloudinaryResult.secure_url){
+        res.status(500).json({
+            message: "cloudinary upload fail!",
+        });
+    }
+    /// mongodb
+    await User.findOneAndUpdate({
+         _id: reqUser?._id
+    },{
+        photoUrl: cloudinaryResult?.secure_url
+    }
+)
+    res.status(200).json({
+        messages:'profile successfully uploaded'
+    })
+
+})
 
 export default usersRoutes
