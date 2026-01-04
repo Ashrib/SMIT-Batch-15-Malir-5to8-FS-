@@ -147,6 +147,7 @@ usersRoutes.post('/profile-upload', upload.single('profilePic'), async(req, res)
 
     let cloudinaryResult = await cloudinary.uploader.upload(file,{folder: 'avatars', public_id:`${reqUser?._id}`})
     console.log(cloudinaryResult.secure_url)
+    console.log(cloudinaryResult.public_id)
 
     if(!cloudinaryResult.secure_url){
         res.status(500).json({
@@ -157,13 +158,30 @@ usersRoutes.post('/profile-upload', upload.single('profilePic'), async(req, res)
     await User.findOneAndUpdate({
          _id: reqUser?._id
     },{
-        photoUrl: cloudinaryResult?.secure_url
+        photoUrl: cloudinaryResult?.secure_url,
+
+        // photoUrl: {
+        //     url: cloudinaryResult?.secure_url,
+        //     publicId: cloudinaryResult.public_id
+        // }
     }
 )
     res.status(200).json({
         messages:'profile successfully uploaded'
     })
+})
+
+// how to delete media from cloudinary
+usersRoutes.delete('/account-images:id',async(req,res)=>{
+    let {id} = req.params;
+    // delete post from mongodb
+    await User.findByIdAndDelete(id);
+
+    // image delete from cloudinary
+    await cloudinary.uploader.destroy(public_id)
 
 })
+
+
 
 export default usersRoutes
