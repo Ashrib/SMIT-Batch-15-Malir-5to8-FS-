@@ -15,6 +15,7 @@ const User = () => {
 
   useEffect(() => {
     fetchUsers()
+    
   }, [])
 
   return (
