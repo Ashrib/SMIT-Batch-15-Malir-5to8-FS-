@@ -1,7 +1,15 @@
+'use client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Posts = () => {
+
+
+  useEffect(()=>{
+    /// axios.get('/api/post')
+  },[])
+
+
   return (
     <div>
       <div> All Posts page</div>

@@ -8,6 +8,13 @@ import { generateToken } from "@/lib/jwt";
 
 
 export async function POST(playload) {
+
+    //// by using controllers
+    //  return registerUser()
+
+    /// OR
+
+
     const {email, password, name, age} = await playload.json();
     console.log({email, password, name, age});
 
