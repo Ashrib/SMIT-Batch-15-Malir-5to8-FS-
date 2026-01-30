@@ -1,9 +1,37 @@
 import { Link } from "expo-router";
 import { View, Text, Image, StyleSheet, ScrollView, Pressable } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
+import * as ImagePicker from 'expo-image-picker';
+import { useState } from "react";
 
 
 export default function HomeScreen() {
+  let [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  let pickImage = async () => {
+    let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (!permissionResult.granted) {
+      alert("Permission to access camera roll is required!");
+      return;
+    }
+
+    let pickerResult = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      // quality: 1,
+      // mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ['images', 'videos'],
+    });
+
+    if (!pickerResult.canceled) {
+      setSelectedImage(pickerResult.assets[0].uri);
+      console.log(pickerResult);
+    }
+
+  }
+
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Text style={{ fontSize: 24, fontWeight: 'bold', textAlign: 'center', marginTop: 20 }}>Home Screen</Text>
@@ -12,6 +40,24 @@ export default function HomeScreen() {
           <Text style={styles.buttonText}>Users</Text>
         </Link>
       </Pressable>
+
+      <View>
+        <Pressable style={{
+          ...styles.button,
+          backgroundColor: 'green',
+          width: 150,
+          alignSelf: 'center'
+        }}
+          onPress={pickImage}>
+          <Text style={styles.buttonText}>Pick Image</Text>
+        </Pressable>
+      </View>
+
+      <View>
+        {selectedImage && <Image source={{ uri: selectedImage }}
+          style={{ width: 200, height: 200, alignSelf: 'center', marginTop: 20 }}
+        />}
+      </View>
     </SafeAreaView>
   );
 }
